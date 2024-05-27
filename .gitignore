@@ -1,0 +1,34 @@
+# General
+
+# Thư mục node_modules cho cả frontend và backend
+**/node_modules/
+
+# Các tệp môi trường cho cả frontend và backend
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Log files cho cả frontend và backend
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+# Editor files cho cả frontend và backend
+**/.vscode/
+**/.idea/
+
+# Misc
+.DS_Store
+
+# Frontend specific
+
+# Thư mục build
+frontend/build/
+
+# Backend specific
+
+# Các thư mục build/output
+backend/dist/
+backend/build/

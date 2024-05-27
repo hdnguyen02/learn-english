@@ -1,0 +1,6 @@
+export const baseUrl = "http://localhost:8080"
+export const authSignInUrl = "/api/v1/auth/sign-in"
+export const authSignUpUrl = "/api/v1/auth/sign-up"
+export const authSignOutUrl = "/api/v1/auth/sign-out"
+export const userInfoUrl = "/api/v1/users"
+export const version = "/api/v1"

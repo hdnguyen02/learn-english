@@ -50,7 +50,7 @@ function Decks() {
         setIdDeckDelete(null)
     }
 
-    function showPopupDeleteDeck(event,id) {
+    function showPopupDeleteDeck(event, id) {
         event.stopPropagation()
         document.getElementById('popup-delete-deck').style.display = 'flex'
         setIdDeckDelete(id)
@@ -90,15 +90,12 @@ function Decks() {
     }, [searchTerm])
 
 
-    
+
 
     return <div>
         <div className='profile flex gap-x-3 items-center justify-between font-medium'>
             <div className='flex gap-x-3 items-center'>
-                <div className='rounded-full overflow-hidden h-9 w-9'>
-                    <img className='object-cover w-full h-full' src='../../public/avatar.avif' alt='Avatar' />
-                </div>
-                <h1>Thầy Thuận badboi</h1>
+                <h3 className='text-md md:text-xl font-medium'>Danh sách bộ thẻ</h3>
             </div>
             <div className='flex gap-x-8 items-center'>
 
@@ -124,27 +121,60 @@ function Decks() {
 
         {decks &&
             <div className='mt-8'>
-                {decks.map(deck => (
-                    <div onClick={() => {handleDetailDeck(deck.id)}} key={deck.id} className='cursor-pointer deck flex justify-between bg-[#EDEFFF] rounded-md py-4 px-8 mb-4'>
-                        <div className='deck-left flex gap-x-6'>
-                            <span className='flex items-center font-medium min-w-40'>{deck.name}</span>
-                            <span className='flex items-center min-w-12'>{deck.numberCards} thẻ</span>
-                            <span className='flex items-center'>{deck.createAt}</span>
-                        </div>
-                        <div className='deck-right flex gap-x-2 items-center'>
-                            <button className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded'>
-                                Chia sẽ
-                            </button>
-                            <Link to={`/decks/edit/${deck.id}`} onClick={event => {
-                                event.stopPropagation()
-                            }} className='bg-ctgray hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded'>Hiệu chỉnh
-                            </Link>
-                            <button onClick={(event) => showPopupDeleteDeck(event, deck.id)} className='bg-ctred hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-900 hover:border-red-600 rounded'>
-                                Xóa
-                            </button>       
-                        </div>
-                    </div>
-                ))}
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Tên
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Số thẻ
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Ngày tạo
+                                </th>
+                                <th className='text-center'>Chia sẻ</th>
+                                <th className='text-center'>Hiệu chỉnh</th>
+                                <th className='text-center'>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {decks.map(deck => (
+                                <tr onClick={() => { handleDetailDeck(deck.id) }} key={deck.id} className="odd:bg-white even:bg-gray-50">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        {deck.name}
+                                    </th>
+                                    <td className="px-6 py-4">
+                                        {deck.numberCards}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                        {deck.createAt}
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                      
+                                            <i className="fa-solid fa-share text-xl"></i>
+                       
+                                        
+                                    </td>
+
+                                    <td className="px-6 py-4 text-center">
+                                        <Link to={`/decks/edit/${deck.id}`} onClick={event => {
+                                            event.stopPropagation()
+                                        }}><i className="fa-regular fa-pen-to-square text-xl"></i>
+                                        </Link>
+                                    </td>
+                                    <td onClick={(event) => showPopupDeleteDeck(event, deck.id)} className="px-6 py-4 text-center">
+                                        <i className="fa-regular fa-trash-can text-xl"></i>
+                                    </td>
+                                </tr>
+                            ))}
+
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* ))} */}
             </div>
         }
         <DeleteDeck idDeckDelete={idDeckDelete} handleCancle={handleCancel} handleDeleteDeck={handleDeleteDeck} />

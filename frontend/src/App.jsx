@@ -23,6 +23,9 @@ import PrepareStudy from './component/PrepareStudy'
 import CreateCard from './component/CreateCard'
 import FlipCard from './page/FlipCard'
 import EditDeck from './component/EditDeck'
+import Contact from './page/Contact'
+import CreateDeck from './component/CreateDeck'
+
 
 
 function App() {
@@ -51,6 +54,7 @@ function App() {
             <Route path='/decks' element={<Deck/>}>
               <Route path='' element={<Decks/>} />
               <Route path=':id' element={<PrepareStudy />} />
+              <Route path='create' element={<CreateDeck />} />
               <Route path=':id/create-cards' element={<CreateCard />} />
               <Route path='edit/:id' element={<EditDeck />} />
               <Route path=':id/learn-cards' element={<FlipCard />} />
@@ -69,6 +73,8 @@ function App() {
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/forgot-password' element={<ForgotPW />} />
           <Route path='/reset-password' element={<ResetPW />}  />
+          <Route path='/contact' element={<Contact />}  />
+          
         </Routes>
       </Router>
     </div>

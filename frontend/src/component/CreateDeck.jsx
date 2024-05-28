@@ -4,7 +4,7 @@ import Fail from './Fail'
 import Success from './Success'
 import { Link } from 'react-router-dom'
 
-function MCreateCard() {
+function CreateDeck() {
 
     const [name, setName] = useState()
     const [description, setDescription] = useState()
@@ -80,4 +80,4 @@ function MCreateCard() {
 
 
 
-export default MCreateCard
+export default CreateDeck

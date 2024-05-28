@@ -10,6 +10,21 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hdnguyen7702@gmail.com
+    password: wwjafhpndrhwrhoc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
 
 system:
   version: "api/v1"

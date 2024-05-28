@@ -85,7 +85,7 @@ function SignUp() {
           type="email"
           id="email"
           name="email"
-          className="mt-2 w-full border-2 rounded-md py-2 px-3"
+          className="mt-2 w-full rounded-md py-2 px-3"
           required
         />
       </div>

@@ -28,35 +28,46 @@ public class AuthService {
     private final Helper helper;
     private final TokenDao tokenDao;
 
-
     private void saveToken(String code, User user){
         Token token = Token.builder().code(code).isSignOut(false).user(user).build();
-        tokenDao.save(token);
+        try {
+            tokenDao.save(token);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
-    
+
 
     public AuthResponse signUp(SignUpRequest signUpRequest) throws Exception {
+        String email = signUpRequest.getEmail();
+        String password = signUpRequest.getPassword();
+        Boolean isRemember = signUpRequest.getIsRemember() != null;
+
         Role role = new Role("STUDENT");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
 
         User userCheck =  userDao.findById(signUpRequest.getEmail()).orElse(null);
         if (userCheck != null) throw new Exception("Email đã được sử dụng!");
-
+        if (signUpRequest.getPassword().length() < 6) throw new Exception("Password cần phải >= 6 ký tự!");
         var user = User.builder()
-                .email(signUpRequest.getEmail())
-                .password(passwordEncoder.encode(signUpRequest.getPassword()))
-                .name(signUpRequest.getName())
-                .birthdate(signUpRequest.getBirthdate())
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .name(null)
+                .dateOfBirth(null)
+                .gender(null)
+                .age(null)
+                .phone(null)
                 .createAt(helper.formatDate(new Date()))
                 .isEnabled(true)
                 .roles(roles)
                 .build();
 
         try {
-            String accessToken = jwtService.generateToken(userDao.save(user));
-            saveToken(accessToken, user);
-
+            String accessToken = jwtService.generateToken(userDao.save(user), isRemember);
+            // saveToken(accessToken, user);
             return AuthResponse.builder()
                     .accessToken(accessToken)
                     .user(new UserDto(user))
@@ -68,15 +79,15 @@ public class AuthService {
     }
 
     public AuthResponse signIn(SignInRequest signInRequest) {
+        String email = signInRequest.getEmail();
+        String password = signInRequest.getPassword();
+        Boolean isRemember = signInRequest.getIsRemember() != null;
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                signInRequest.getEmail(), signInRequest.getPassword()
+                email, password
         ));
-
-        var user = userDao.findById(signInRequest.getEmail()).orElseThrow();
-        String accessToken = jwtService.generateToken(user);
-
-        revokeTokensValid(user);
-        saveToken(accessToken, user);
+        User user = userDao.findById(email).orElseThrow();
+        String accessToken = jwtService.generateToken(user, isRemember);
+        // saveToken(accessToken, user);
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
@@ -84,14 +95,5 @@ public class AuthService {
                 .build();
     }
 
-    private void revokeTokensValid(User user) {
-        List<Token> tokensValid = tokenDao.findTokensValidOfUser(user.getEmail());
-        if (!tokensValid.isEmpty()) {
-            tokensValid.forEach(tokenValid -> {
-                tokenValid.setIsSignOut(true);
-            });
-        }
-        tokenDao.saveAll(tokensValid);
-    }
 }
 

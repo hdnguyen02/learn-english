@@ -17,6 +17,12 @@ import ChangePW from './component/ChangePW'
 import ForgotPW from './page/Forgot-PW'
 import ResetPW from './page/ResetPW'
 import PrivateRoutes from './helper/PrivateRoutes'
+import Deck from './page/Deck'
+import Decks from './component/Decks'
+import PrepareStudy from './component/PrepareStudy'
+import CreateCard from './component/CreateCard'
+import FlipCard from './page/FlipCard'
+import EditDeck from './component/EditDeck'
 
 
 function App() {
@@ -40,6 +46,14 @@ function App() {
                 <Route path='add-member' element={<AddMember />} />
                 <Route path='share-student-session' element={<ShareStudentSesion />} />
               </Route>
+            </Route>
+
+            <Route path='/decks' element={<Deck/>}>
+              <Route path='' element={<Decks/>} />
+              <Route path=':id' element={<PrepareStudy />} />
+              <Route path=':id/create-cards' element={<CreateCard />} />
+              <Route path='edit/:id' element={<EditDeck />} />
+              <Route path=':id/learn-cards' element={<FlipCard />} />
             </Route>
 
             {/* settings */}

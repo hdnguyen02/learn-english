@@ -3,9 +3,9 @@ import { Outlet  } from 'react-router-dom'
 
 
 
-function ClassUser() { 
+function Deck() { 
   return (<div className='mx-24 mt-32'>
       <Outlet />
   </div>)
 }
-export default ClassUser  
+export default Deck

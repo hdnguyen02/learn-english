@@ -28,8 +28,8 @@ public class User implements UserDetails {
     @Column(length = 100)
     private String name;
 
-    @Column(length = 10)
-    private String birthdate;
+    @Column(name="date_of_birth", length = 10)
+    private String dateOfBirth;
 
     @Column(name = "create_at", length = 10)
     private String createAt;
@@ -58,6 +58,18 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Token> tokens;
+
+    @Column
+    private Integer age;
+
+    @Column
+    private String gender;
+
+    @Column
+    private String phone;
+
+    @Column
+    private String avatar;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

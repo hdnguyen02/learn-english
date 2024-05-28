@@ -1,10 +1,9 @@
 package com.hdnguyen.learnenglish.dto;
 
-import com.hdnguyen.learnenglish.entity.Role;
 import com.hdnguyen.learnenglish.entity.User;
 import lombok.*;
-
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,17 +13,20 @@ import java.util.Set;
 public class UserDto {
     private String email;
     private String name;
-    private String birthdate;
+    private String dateOfBirth;
     private String createAt;
     private Boolean isEnabled;
-    private Set<Role> roles;
+    private List<String> roles;
 
     public UserDto(User user) {
+        roles = new ArrayList<>();
         email = user.getEmail();
         name = user.getName();
-        birthdate = user.getBirthdate();
+        dateOfBirth = user.getDateOfBirth();
         createAt = user.getCreateAt();
         isEnabled = user.getIsEnabled();
-        roles = user.getRoles();
+        user.getRoles().forEach(role -> {
+            roles.add(role.getName());
+        });
     }
 }

@@ -6,7 +6,6 @@ import { Link, useNavigate   } from 'react-router-dom'
 function SignIn() {
   const failRef = useRef()
   const navigate = useNavigate()
-  // khởi tạo 1 biến. 
   let isShowPassword = false
   const emailRef = useRef(null)
   const passwordRef = useRef(null)
@@ -18,7 +17,6 @@ function SignIn() {
     if (isShowPassword) { 
       elPassword.type = 'password'
       elViewPassword.src = '/hide.png'
-      
     }
     else {
       elPassword.type = 'text'
@@ -45,12 +43,11 @@ function SignIn() {
       const data = response.data
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('isAuthenticated', true)
-      localStorage.setItem('email', data.user.email)
       navigate('/')
 
     }
     catch (error) {
-      failRef.current.show(error.message, 2000)
+      failRef.current.show("Thông tin đăng nhập không chính xác!", 4000)
     }
   }
   function handleSignIn(event) {

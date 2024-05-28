@@ -9,4 +9,5 @@ import lombok.Getter;
 public class SignInRequest {
     private String email;
     private String password;
+    private Boolean isRemember;
 }

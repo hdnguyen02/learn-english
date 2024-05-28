@@ -1,7 +1,6 @@
 package com.hdnguyen.learnenglish.service;
 
 import com.hdnguyen.learnenglish.dao.TokenDao;
-import com.hdnguyen.learnenglish.entity.Token;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Claims;
@@ -28,19 +27,38 @@ public class JwtService {
         return extractClaim(token,Claims::getSubject);
     }
 
-    public String generateToken (Map<String,Object> extractClaims, UserDetails userDetails) {
+    public String generateToken (Map<String,Object> extractClaims, UserDetails userDetails, Boolean isRemember) {
+        Date dateExpiration;
+        if (isRemember) {
+            dateExpiration = new Date(System.currentTimeMillis() +1000 * 60 * 60 * 24 * 7);
+        }
+        else {
+            dateExpiration = new Date(System.currentTimeMillis() +1000 * 60 * 60 * 24);
+        }
+
         return Jwts
                 .builder()
                 .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis())) // thời gian tạo ra jwt
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // tương ứng 1 ngày
+                .setExpiration(dateExpiration)
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(),userDetails);
+    public String generateTokenForgotPassword(String email) {
+        return Jwts
+                .builder()
+                .setSubject(email)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
+
+    }
+
+    public String generateToken(UserDetails userDetails, Boolean isRemember) {
+        return generateToken(new HashMap<>(),userDetails, isRemember);
     }
 
     public <T> T extractClaim (String token, Function<Claims, T> claimsResolve) {
@@ -70,7 +88,7 @@ public class JwtService {
 
     public boolean isTokenValid (String token,UserDetails userDetail) {
         final String email = extractUsername(token);
-        boolean isValid = tokenDao.findByCode(token).map(t -> !t.getIsSignOut()).orElse(false);
-        return (email.equals(userDetail.getUsername())) && !isTokenExpired(token) && isValid;
+        // boolean isValid = tokenDao.findByCode(token).map(t -> !t.getIsSignOut()).orElse(false);
+        return email.equals(userDetail.getUsername()) && !isTokenExpired(token);
     }
 }

@@ -32,18 +32,11 @@
 
 
 # [**Introduction**](#introduction)
-
-Chào các bạn, mình tên là Hồ Đức Nguyên.
-Mã số sinh viên N20DCCN047.
-Niên khóa 2020-2025.
-
-Lời đầu tiên mình xin chào các bạn và cảm ơn tất cả các bạn đang ở đây. Trong tài liệu này mình sẽ chia sẻ tất cả những gì mình làm trong đồ án.
-
 Đồ án này có tất cả 3 đồ án nhỏ: 
 
-* [**backend API**](#)
-* [**Frontend ReactJS**](https://github.com/hdnguyen02/learn-english-frontend)
-* [**Mobile Java**](https://github.com/hdnguyen02/learn-english-frontend) (Đang trong quá trình làm)
+* [**backend API**]()
+* [**Frontend ReactJS**]()
+* [**Mobile Java**]() (Đang trong quá trình làm)
 
 **Nói sơ qua về đồ án, online learning là website, app hỗ trợ người dùng trong việc học tập trực tuyến, với các tính năng như tạo thẻ, tham gia lớp học cùng nhiều người dùng, bình luận và chia sẻ thẻ cho**
 

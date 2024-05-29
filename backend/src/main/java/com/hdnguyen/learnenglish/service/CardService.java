@@ -1,6 +1,5 @@
 package com.hdnguyen.learnenglish.service;
 
-
 import com.hdnguyen.learnenglish.Helper;
 import com.hdnguyen.learnenglish.dao.CardDao;
 import com.hdnguyen.learnenglish.dao.DeckDao;
@@ -93,7 +92,7 @@ public class CardService {
 
     public CardDto getCardWithId(Integer id) {
         String emailUser = helper.getEmailUser();
-        Card card = cardDao.findFirstByIdAndDeckUserEmail(id, emailU    ser).orElseThrow();
+        Card card = cardDao.findFirstByIdAndDeckUserEmail(id, emailUser).orElseThrow();
         return new CardDto(card);
     }
 

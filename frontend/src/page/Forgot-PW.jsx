@@ -36,10 +36,6 @@ export default function ForgotPW() {
     }
 
 
-
-
-
-
     return (
         <div className='mt-32 flex w-full justify-center'>
             <form onSubmit={handleForgotPW} className='flex flex-col max-w-lg gap-y-6'>

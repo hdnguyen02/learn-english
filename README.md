@@ -1,14 +1,11 @@
-<h1 align="center">Backend API Spring boot - hỗ trợ người dùng học tiếng anh
+<h1 align="center">Online learning - Website học tập trực tuyến
 </h1>
-
-<p align="center">
-    <img src="src/main/resources/static/BLOG-SpringBoot@2x.png" />
-</p>
 
 
 # [**Table Of Content**](#table-of-content)
 - [**Table Of Content**](#table-of-content)
 - [**Introduction**](#introduction)
+- [**Giao diện reactJS websỉe**](#giao-dien)
 - [**Topic**](#topic)
 - [**Database**](#database)
 - [**API Document**](#api-document) 
@@ -42,15 +39,62 @@ Niên khóa 2020-2025.
 
 Lời đầu tiên mình xin chào các bạn và cảm ơn tất cả các bạn đang ở đây. Trong tài liệu này mình sẽ chia sẻ tất cả những gì mình làm trong đồ án.
 
-Đồ án này có tất cả 2 phần bao gồm:
+Đồ án này có tất cả 3 đồ án nhỏ: 
 
-* [**backend API**](#) (Hiện tại)
+* [**backend API**](#)
+* [**Frontend ReactJS**](https://github.com/hdnguyen02/learn-english-frontend)
+* [**Mobile Java**](https://github.com/hdnguyen02/learn-english-frontend) (Đang trong quá trình làm)
 
-* [**Frontend VueJS**](https://github.com/hdnguyen02/learn-english-frontend)
+**Nói sơ qua về đồ án, online learning là website, app hỗ trợ người dùng trong việc học tập trực tuyến, với các tính năng như tạo thẻ, tham gia lớp học cùng nhiều người dùng, bình luận và chia sẻ thẻ cho**
 
 
+# [**Giao diện reactJS website**](#giao-dien)
 
-Dự án các bạn đang đọc được sử dụng để mô tả chi tiết phần `backend API`
+- Trang chủ chưa đăng nhập
+<p align="center">
+    <img src="image-readme/frontend/trang-chu.png"/>
+</p>
+
+- Trang chủ đã đăng nhập
+<p align="center">
+    <img src="image-readme/frontend/trang-chu-khi-da-dang-nhap.png"/>
+</p>
+
+- Đăng nhập
+<p align="center">
+    <img src="image-readme/frontend/dang-nhap.png"/>
+</p>
+
+- Đăng ký
+<p align="center">
+    <img src="image-readme/frontend/dang-ky.png"/>
+</p>
+
+- Quên mật khẩu
+<p align="center">
+    <img src="image-readme/frontend/quen-mat-khau.png"/>
+</p>
+
+- Danh sách bộ thẻ
+<p align="center">
+    <img src="image-readme/frontend/danh-sach-bo-the.png"/>
+</p>
+
+- Xóa bộ thẻ
+<p align="center">
+    <img src="image-readme/frontend/xoa-bo-the.png"/>
+</p>
+
+- Học thẻ
+<p align="center">
+    <img src="image-readme/frontend/lat-the.png"/>
+</p>
+
+- Cài đặt
+<p align="center">
+    <img src="image-readme/frontend/cai-dat.png"/>
+</p>
+
 
 # [**Topic**](#topic)
 
@@ -64,7 +108,7 @@ Có thể giải thích yêu cầu đề tài ngắn gọn như sau:
 # [**Database**](#database)
 
 <p align="center">
-    <img src="src/main/resources/static/diagram.png" />
+    <img src="image-readme/backend/diagram.png" />
 </p>
 <h3 align="center">
 
@@ -96,7 +140,7 @@ Tớ sẽ giải thích qua về ý nghĩa các bảng xuất hiện trong datab
 Bạn có thể start server lên và truy cập vào: http://localhost:8080/swagger-ui/index.html để có cái nhìn tổng quan về schemas và api
 
 <p align="center">
-    <img src="src/main/resources/static/tổng quan api.png"/>
+    <img src="image-readme/backend/tổng quan api.png"/>
 </p>
 <h3 align="center">
 
@@ -132,7 +176,7 @@ Dữ liệu trả về từ máy chủ tuân thủ theo 1 format duy nhất.
 ## [**3. Authentication**](#3-authentication)
 
 <p align="center">
-    <img src="src/main/resources/static/auth-controller.png"/>
+    <img src="image-readme/backend/auth-controller.png"/>
   Các API trong AuthController
 </p>
 <h3 align="center">
@@ -271,7 +315,7 @@ Dữ liệu trả về từ máy chủ tuân thủ theo 1 format duy nhất.
 ## [**4. Bộ thẻ**](#4-bộ-thẻ)
 
 <p align="center">
-    <img src="src/main/resources/static/bộ thẻ/tổng quan bộ thẻ.png" />
+    <img src="image-readme/backend/tổng quan bộ thẻ.png" />
     Các API trong DeckController
 </p>
 <h3 align="center">
@@ -567,7 +611,7 @@ Dữ liệu trả về từ máy chủ tuân thủ theo 1 format duy nhất.
 ## [**5. Thẻ**](#5-thẻ)
 
 <p align="center">
-    <img src="src/main/resources/static/api-card-controller.png"/>
+    <img src="image-readme/backend/api-card-controller.png"/>
   Các API trong CardController
 </p>
 <h3 align="center">

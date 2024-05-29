@@ -5,7 +5,6 @@ function Navbar() {
   const isAuthenticated = JSON.parse(localStorage.getItem('isAuthenticated'))
   const location = useLocation()
 
-
   function handleSignOut() {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('isAuthenticated')
@@ -26,13 +25,13 @@ function Navbar() {
         <Link to={"/"} className='text-blue-700 text-xl md:text-3xl font-bold'>
           Online learning
         </Link>
-
       </div>
-      <div className='hidden md:flex gap-x-4 lg:gap-x-8'>
+      <div className='hidden md:flex gap-x-4 lg:gap-x-8 text-sm uppercase'>
         <Link to={"/"} className='hover:cursor-pointer font-medium'>Trang chủ</Link>
         {isAuthenticated && <Link to={"/decks"} className='hover:cursor-pointer font-medium'>Bộ thẻ</Link>}
+        {isAuthenticated && <Link to={"/cards"} className='hover:cursor-pointer font-medium'>Thẻ</Link>}
         {isAuthenticated && <Link to={"/classes"} className='hover:cursor-pointer font-medium'>Lớp</Link>}
-        <a className='hover:cursor-pointer font-medium'>Liên hệ</a>
+        <Link to={'/contact'} className='hover:cursor-pointer font-medium'>Liên hệ</Link>
       </div>
       {/* ẩn hiện tùy theo authenticate*/}
       {!isAuthenticated && (
@@ -54,7 +53,7 @@ function Navbar() {
             </div>
             <div className='h-2'></div>
             <div className="dropdown-content-left">
-              <Link to={'/settings'} className=''>Cài đặt</Link>
+              <Link to={'/settings/info'} className=''>Cài đặt</Link>
               <a onClick={handleSignOut}>Đăng xuất</a>
             </div>
           </div>
@@ -67,7 +66,7 @@ function Navbar() {
         <button onClick={handleShowMenu}>
           <img className='w-8' src="/menu.png" alt="" />
         </button>
-        <ul id='menu-mobile' className='hidden fixed top-0 bottom-0 right-0 w-64 bg-blue-500 text-white font-medium p-8 flex-col gap-y-4'>
+        <ul id='menu-mobile' className='hidden fixed top-0 bottom-0 right-0 uppercase text-sm w-64 bg-blue-500 text-white font-medium p-8 flex-col gap-y-4'>
           <button onClick={handleCloseMenu}>
             <img src="/close.png" className='w-8' alt="" />
           </button>
@@ -78,10 +77,13 @@ function Navbar() {
             <Link to={'/decks'}>Bộ thẻ</Link>
           </li>}
           {isAuthenticated && <li>
+            <Link to={'/cards'}>Thẻ</Link>
+          </li>}
+          {isAuthenticated && <li>
             <Link to={'/classes'}>Lớp</Link>
           </li>}
           <li>
-            <Link to={'contact'}>Liên hệ</Link>
+            <Link to={'/contact'}>Liên hệ</Link>
           </li>
         </ul>
       </div>

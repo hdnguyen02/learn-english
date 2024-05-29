@@ -82,7 +82,7 @@ function SignUp() {
         </label>
         <input
           ref={emailRef}
-          type="email"
+          type="email" 
           id="email"
           name="email"
           className="mt-2 w-full rounded-md py-2 px-3"

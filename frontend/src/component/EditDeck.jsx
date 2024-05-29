@@ -76,9 +76,6 @@ function EditDeck() {
                 <img className='w-5 h-5' src="../../public/back.png" alt="" />
                 <span>Bộ thẻ</span>
             </Link>
-            <h3 className="font-medium text-gray-900">
-                Hiệu chỉnh thẻ
-            </h3>
         </div>
 
         <div className="relative p-4 w-full max-w-2xl max-h-full">

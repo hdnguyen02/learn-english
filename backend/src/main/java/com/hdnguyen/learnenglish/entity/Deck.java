@@ -27,7 +27,7 @@ public class Deck {
     @JoinColumn(name="email_user")
     private User user;
 
-    @OneToMany(mappedBy = "deck",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "deck",fetch = FetchType.EAGER)
     private List<Card> cards;
 
     @Column(name = "create_at", length = 10)

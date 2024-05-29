@@ -84,16 +84,16 @@ public class CardService {
         return new CardDto(cardDao.save(card));
     }
 
-    public CardDto deleteCard(Integer id) throws Exception {
+    public CardDto deleteCard(Integer id)  {
         String emailUser = helper.getEmailUser();
         Card card = cardDao.findFirstByIdAndDeckUserEmail(id, emailUser).orElseThrow();
         cardDao.delete(card);
         return new CardDto(card);
     }
 
-    public CardDto getCardWithId(Integer id) throws Exception {
+    public CardDto getCardWithId(Integer id) {
         String emailUser = helper.getEmailUser();
-        Card card = cardDao.findFirstByIdAndDeckUserEmail(id, emailUser).orElseThrow();
+        Card card = cardDao.findFirstByIdAndDeckUserEmail(id, emailU    ser).orElseThrow();
         return new CardDto(card);
     }
 

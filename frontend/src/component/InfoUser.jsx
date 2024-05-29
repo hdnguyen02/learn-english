@@ -83,8 +83,7 @@ export default function InfoUser() {
         getUser()
     }, [])  
 
-    return (user && <div className="flex justify-center items-center w-full">
-
+    return (user && <div className="flex justify-center items-center w-full px-12">
         <div className="flex flex-col items-center mt-4">
             <form
                 onSubmit={handleChangeInfo}
@@ -107,7 +106,7 @@ export default function InfoUser() {
                     }
                     
                 </div>
-                <div className="mt-4 flex flex-wrap -mx-3 mb-6">
+                <div className="mt-4 flex flex-wrap md:-mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -140,7 +139,7 @@ export default function InfoUser() {
                         </select>
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="flex flex-wrap md:-mx-3 mb-6">
                     <div className="w-full px-3">
                         <label
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -158,7 +157,7 @@ export default function InfoUser() {
                         </input>
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="flex flex-wrap md:-mx-3 mb-6">
                     <div className="w-full px-3 mb-6 md:mb-0">
                         <label
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -176,7 +175,7 @@ export default function InfoUser() {
                     </div>
 
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="flex flex-wrap md:-mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

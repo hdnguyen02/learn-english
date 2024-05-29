@@ -41,7 +41,7 @@ export default function ForgotPW() {
 
 
     return (
-        <div className='flex w-full justify-center'>
+        <div className='mt-32 flex w-full justify-center'>
             <form onSubmit={handleForgotPW} className='flex flex-col max-w-lg gap-y-6'>
                 <h1 className='font-medium text-3xl'>Đặt lại mật khẩu của bạn</h1>
                 <p>Hay nhập địa chỉ email ma bạn đa đăng kí. Chúng tôi sẽ gửi cho bạn một liên kết để đăng nhập và đặt lại mật khẩu của bạn.</p>

@@ -81,9 +81,6 @@ function Decks() {
         }
     }
 
-    function handleDetailDeck(id) {
-        navigate(`/decks/${id}`)
-    }
 
     useEffect(() => {
         fetchDecks(searchTerm)
@@ -134,14 +131,16 @@ function Decks() {
                                 <th scope="col" className="px-6 py-3">
                                     Ngày tạo
                                 </th>
+                                <th className='text-center'>Học thẻ</th>
                                 <th className='text-center'>Chia sẻ</th>
                                 <th className='text-center'>Hiệu chỉnh</th>
                                 <th className='text-center'>Xóa</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
                             {decks.map(deck => (
-                                <tr onClick={() => { handleDetailDeck(deck.id) }} key={deck.id} className="odd:bg-white even:bg-gray-50">
+                                <tr key={deck.id} className="odd:bg-white even:bg-gray-50">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {deck.name}
                                     </th>
@@ -151,22 +150,24 @@ function Decks() {
                                     <td className="px-6 py-4">
                                         {deck.createAt}
                                     </td>
-                                    <td className="px-6 py-4 text-center">
-                                      
-                                            <i className="fa-solid fa-share text-xl"></i>
-                       
+                                    <td className='px-6 py-4 text-center'>
+                                        <Link to={`/decks/${deck.id}/learn-cards`}>
+                                            <i className="fa-solid fa-graduation-cap text-xl"></i>
+                                        </Link>
                                         
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                        <i className="fa-solid fa-share text-xl"></i>
                                     </td>
 
                                     <td className="px-6 py-4 text-center">
-                                        <Link to={`/decks/edit/${deck.id}`} onClick={event => {
-                                            event.stopPropagation()
-                                        }}><i className="fa-regular fa-pen-to-square text-xl"></i>
+                                        <Link to={`/decks/edit/${deck.id}`}><i className="fa-regular fa-pen-to-square text-xl"></i>
                                         </Link>
                                     </td>
                                     <td onClick={(event) => showPopupDeleteDeck(event, deck.id)} className="px-6 py-4 text-center">
                                         <i className="fa-regular fa-trash-can text-xl"></i>
                                     </td>
+                                  
                                 </tr>
                             ))}
 

@@ -77,12 +77,12 @@
   cursor: pointer;
 }
 
-input, textarea:focus {
-  border: 1px solid gray;
+input, textarea, select {
+  border: 1px solid rgb(209 213 219);
   border-radius: 4px;
 }
 
-input:focus, textarea:focus {
+input:focus, textarea:focus, select:focus {
   border: 1px solid rgb(96,165,250);
   box-shadow: 0 0 5px rgba(96,165,250,1);
   outline: none;
@@ -91,3 +91,14 @@ input:focus, textarea:focus {
 input[type="file"] {
   border: 0;
 }
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+

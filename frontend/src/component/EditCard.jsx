@@ -15,6 +15,7 @@ function EditCard() {
 
 
 
+
     async function fetchDecks(searchDecks) {
         let url = `${baseUrl + version}/decks`
         try {
@@ -66,8 +67,6 @@ function EditCard() {
     async function handleEditCard() {
 
         const url = `${baseUrl + version}/cards/${params.id}`
-        console.log(url)
-
         const formData = new FormData()
 
         const inputTermCard = document.getElementById('card-term')
@@ -91,27 +90,25 @@ function EditCard() {
 
         try {
             const jsonRp = await fetch(url, {
-              method: 'PUT',
-              headers: {
-                'Authorization': `Bearer ${accessToken}`,
-              },
-              body: formData
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                body: formData
             })
             const response = await jsonRp.json()
             if (!jsonRp.ok) {
-              throw new Error(response.message)
+                throw new Error(response.message)
             }
             successRef.current.show(response.message, 2000)
-          }
-          catch (error) {
+        }
+        catch (error) {
             failRef.current.show(error.message, 2000)
-          }
-
+        }
     }
 
-
-
     useEffect(() => {
+        console.log("chạy vào đây")
         fetchDecks()
         getCard()
     }, [])
@@ -119,31 +116,40 @@ function EditCard() {
 
     return <div>
 
-        {card && <div className="mt-10">
+        {card && <div>
             <div className="info-deck flex justify-end items-center">
                 <button onClick={handleEditCard} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                     Hiệu chỉnh
                 </button>
             </div>
 
-            <form className="site-create bg-[#F6F7FB] rounded-lg p-6 mt-16">
+            <form className="site-create bg-[#F6F7FB] rounded-lg p-6 mt-8">
                 <div className="flex items-center justify-between gap-x-8">
                     <div className="w-full border-r pr-6 border-gray-400">
-                        <div className="flex justify-between gap-x-16 mt-4">
+                        <div className="flex-col md:flex-row flex justify-between gap-x-16 mt-4">
                             <div className="flex flex-col w-full gap-y-3">
-                                <input defaultValue={card.term} id="card-term" className="border-0 border-b bg-transparent border-gray-400 focus:outline-0" type="text" />
-                                <label htmlFor="">Thuật ngữ</label>
+                                <label htmlFor="card-term">Thuật ngữ</label>
+                                <input defaultValue={card.term} id="card-term" className="bg-transparent h-10 px-4" type="text" />
                             </div>
 
-                            <div className="flex flex-col w-full gap-y-3">
-                                <input defaultValue={card.definition} id="card-definition" className="border-0 border-b bg-transparent border-gray-400 focus:outline-none" type="text" />
+                            <div className="mt-4 md:mt-0 flex flex-col w-full gap-y-3">
                                 <label htmlFor="">Định nghĩa</label>
+                                <input defaultValue={card.definition} id="card-definition" className="bg-transparent h-10 px-4" type="text" />
+
                             </div>
                         </div>
-                        <div className="mt-4">
-                            <div className="flex flex-col gap-y-3">
-                                <input defaultValue={card.example} id="card-example" className="border-0 border-b bg-transparent border-gray-400 focus:outline-none" type="text" />
+                        <div className="flex-col md:flex-row flex justify-between gap-x-16 mt-4">
+                            <div className="flex flex-col w-full gap-y-3">
                                 <label htmlFor="">Thông tin thêm, ví dụ</label>
+                                <input defaultValue={card.example} id="card-example" className="bg-transparent h-10 px-4" type="text" />
+                            </div>
+                            <div className="mt-4 md:mt-0 flex flex-col w-full gap-y-3">
+                                <label>Bộ thẻ</label>
+                                <select id="card-id-deck" defaultValue={card.deck.id} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    {decks.map((deck) => (
+                                        <option key={deck.id} value={deck.id}>{deck.name}</option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -153,24 +159,17 @@ function EditCard() {
                         <span>Âm thanh</span>
                         <input id="card-audio" type="file" />
                     </div>
-
                 </div>
 
                 <hr className="my-12"></hr>
+                <div className="flex justify-start gap-x-4 items-center">
 
+                    {card.image && <div className="h-32 flex justify-center">
+                        <img className="object-contain" src={card.image} />
+                    </div>}
 
-                <div className="flex justify-between items-center">
-                    <div>
-                        <span>Bộ thẻ</span>
-                        
-                        <select id="card-id-deck" defaultValue={card.deck.id} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            {decks.map((deck) => (
-                                <option key={deck.id} value={deck.id}>{deck.name}</option>
-                            ))}
-                        </select>
-                    </div>
                     {card.audio && <div className="">
-                        <div className="">  
+                        <div className="">
                             <audio controls>
                                 <source src={card.audio} type="audio/mpeg" />
                                 Your browser does not support the audio element.
@@ -178,11 +177,8 @@ function EditCard() {
                         </div>
                     </div>}
 
-                    {card.image && <div className="h-20 flex justify-center">
-                        <img className="object-contain" src={card.image} />
-                    </div>}
+                  
                 </div>
-
             </form>
         </div>
         }

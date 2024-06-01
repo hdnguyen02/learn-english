@@ -4,10 +4,12 @@ import com.hdnguyen.learnenglish.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.expression.spel.ast.OpAnd;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface TokenDao extends JpaRepository<Token, Integer> {
 
     // lấy ra những token chưa đăng xuất của người dùng.

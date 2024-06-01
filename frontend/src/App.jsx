@@ -26,6 +26,7 @@ import Contact from './page/Contact'
 import CreateDeck from './component/CreateDeck'
 import EditCard from './component/EditCard' 
 import Card from './page/Card'
+import Cards from './component/Cards'
 
 
 
@@ -59,6 +60,7 @@ function App() {
             </Route>
 
             <Route path="/cards" element={<Card />} >
+            <Route path='' element={<Cards />} />
               <Route path='edit/:id' element={<EditCard />} />
           </Route>
 

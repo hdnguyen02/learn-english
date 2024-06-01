@@ -1,6 +1,5 @@
 package com.hdnguyen.learnenglish;
 
-import com.hdnguyen.learnenglish.controller.AuthController;
 import com.hdnguyen.learnenglish.dao.RoleDao;
 import com.hdnguyen.learnenglish.entity.Role;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 import java.util.List;
 
 @SpringBootApplication
-public class LearnEnglishApplication {
+public class App {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LearnEnglishApplication.class, args);
+		SpringApplication.run(App.class, args);
 	}
 	@Bean
 	CommandLineRunner commandLineRunner (RoleDao roleDao) {

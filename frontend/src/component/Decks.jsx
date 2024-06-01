@@ -92,7 +92,7 @@ function Decks() {
     return <div>
         <div className='profile flex gap-x-3 items-center justify-between font-medium'>
             <div className='flex gap-x-3 items-center'>
-                <h3 className='text-md md:text-xl font-medium'>Danh sách bộ thẻ</h3>
+                <h3 className='text-md md:text-2xl font-medium'>Danh sách bộ thẻ</h3>
             </div>
             <div className='flex gap-x-8 items-center'>
 
@@ -119,7 +119,7 @@ function Decks() {
         {decks &&
             <div className='mt-8'>
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500 pb-8">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" className="px-6 py-3">

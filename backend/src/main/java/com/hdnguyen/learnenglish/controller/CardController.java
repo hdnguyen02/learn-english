@@ -37,25 +37,37 @@ public class CardController {
         Response response = new Response(cardDto, message, true);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-
-    @GetMapping("/cards")
-    public ResponseEntity<Response> getCards(@RequestParam (required = false) String searchTerm,
-                                             @RequestParam (required = false) Integer idDeck,
-                                             @RequestParam (required = false) Boolean isFavourite,
-                                             @RequestParam (required = false) Boolean isRemembered) {
-
-        List<CardDto> cardsDto;
-        if (searchTerm != null) {
-            cardsDto = cardService.searchCards(searchTerm);
-        }
-        else if (idDeck != null || isFavourite != null || isRemembered != null) {
-            cardsDto = cardService.filterCards(idDeck, isFavourite, isRemembered);
-        }
-        else {
-            cardsDto = cardService.getCards();
-        }
+    @GetMapping("/cards/search")
+    public ResponseEntity<Response> searchCards(@RequestParam String content) {
+        List<CardDto> cardsDto = cardService.searchCards(content);
         String message = "Truy vấn card thành công";
         Response response = new Response(cardsDto, message, true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/cards/filter")
+    public ResponseEntity<Response> filterCards(@RequestParam (required = false) Integer idDeck,
+                                                @RequestParam (required = false) Boolean isFavourite,
+                                                @RequestParam (required = false) Boolean isRemembered) {
+
+        System.out.println(idDeck);
+        System.out.println(isFavourite);
+        System.out.println(isRemembered);
+        List<CardDto> cardsDto = cardService.filterCards(idDeck, isFavourite, isRemembered);
+        String message = "Truy vấn card thành công";
+        Response response = new Response(cardsDto, message, true);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/cards")
+    public ResponseEntity<Response> getCards() {
+
+        List<CardDto> cardsDto = cardService.getCards(); // thực hiện truy vấn tất cả.
+        String message = "Truy vấn card thành công";
+        Response response = new Response(cardsDto, message, true);
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("cards/{id}")
@@ -63,6 +75,14 @@ public class CardController {
         CardDto cardDto = cardService.getCardWithId(id);
         String message = "Truy vấn thẻ thành công";
         Response response = new Response(cardDto, message, true);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("cards")
+    public ResponseEntity<Response> deleteCard(@RequestParam int [] ids) {
+        String message = "Xóa thẻ thành công";
+        cardService.deleteCards(ids);
+        Response response = new Response(null, message, true);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

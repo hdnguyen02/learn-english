@@ -63,13 +63,13 @@ function CreateCard() {
             inputDefinitionCard.value = ''
             inputExampleCard.value = ''
             inputAudioCard.value = null
-            inputImageCard.value = null
-
+            inputImageCard.value = null 
         }
         catch (error) {
             console.log(error)
             failRef.current.show(error.message, 2000)
         }
+        
     }
 
     useEffect(() => {

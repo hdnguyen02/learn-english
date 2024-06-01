@@ -119,4 +119,13 @@ public class CardService {
         cards.forEach(card -> cardsDto.add(new CardDto(card)));
         return cardsDto;
     }
+
+    // xóa không trả về gì cả.
+    public void deleteCards(int [] ids) {
+        String emailUser = helper.getEmailUser();
+        for (int id : ids) {
+            Card card = cardDao.findFirstByIdAndDeckUserEmail(id, emailUser).orElseThrow();
+            cardDao.delete(card);
+        }
+    }
 }

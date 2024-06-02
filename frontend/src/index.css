@@ -102,3 +102,27 @@ input[type="file"] {
 }
 
 
+.link-active {
+  border-bottom: 3px solid green;
+  color: green;
+}
+
+/* Chỉ áp dụng cho trình duyệt WebKit như Chrome, Safari */
+::-webkit-scrollbar {
+  width: 8px; /* Đặt chiều rộng của thanh cuộn dọc */
+  height: 8px; /* Đặt chiều cao của thanh cuộn ngang */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey; /* Màu của thanh cuộn */
+  border-radius: 4px; /* Bo tròn các góc của thanh cuộn */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Màu nền của track */
+  border-radius: 4px; /* Bo tròn các góc của track */
+}
+
+html {
+  overflow-y: scroll;
+}

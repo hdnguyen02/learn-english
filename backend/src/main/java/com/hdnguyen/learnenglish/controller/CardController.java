@@ -1,7 +1,6 @@
 package com.hdnguyen.learnenglish.controller;
 
-
-import com.fasterxml.jackson.core.util.RecyclerPool;
+    
 import com.hdnguyen.learnenglish.dto.CardDto;
 import com.hdnguyen.learnenglish.response.Response;
 import com.hdnguyen.learnenglish.service.CardService;
@@ -38,24 +37,20 @@ public class CardController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
     @GetMapping("/cards/search")
-    public ResponseEntity<Response> searchCards(@RequestParam String content) {
-        List<CardDto> cardsDto = cardService.searchCards(content);
-        String message = "Truy vấn card thành công";
-        Response response = new Response(cardsDto, message, true);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+        public ResponseEntity<Response> searchCards(@RequestParam String content) {
+            List<CardDto> cardsDto = cardService.searchCards(content);
+            String message = "Truy vấn card thành công";
+            Response response = new Response(cardsDto, message, true);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
 
-    @GetMapping("/cards/filter")
-    public ResponseEntity<Response> filterCards(@RequestParam (required = false) Integer idDeck,
-                                                @RequestParam (required = false) Boolean isFavourite,
-                                                @RequestParam (required = false) Boolean isRemembered) {
-
-        System.out.println(idDeck);
-        System.out.println(isFavourite);
-        System.out.println(isRemembered);
-        List<CardDto> cardsDto = cardService.filterCards(idDeck, isFavourite, isRemembered);
-        String message = "Truy vấn card thành công";
-        Response response = new Response(cardsDto, message, true);
+        @GetMapping("/cards/filter")
+        public ResponseEntity<Response> filterCards(@RequestParam (required = false) Integer idDeck,
+                                                    @RequestParam (required = false) Boolean isFavourite,
+                                                    @RequestParam (required = false) Boolean isRemembered) {
+            List<CardDto> cardsDto = cardService.filterCards(idDeck, isFavourite, isRemembered);
+            String message = "Truy vấn card thành công";
+            Response response = new Response(cardsDto, message, true);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -63,7 +58,6 @@ public class CardController {
 
     @GetMapping("/cards")
     public ResponseEntity<Response> getCards() {
-
         List<CardDto> cardsDto = cardService.getCards(); // thực hiện truy vấn tất cả.
         String message = "Truy vấn card thành công";
         Response response = new Response(cardsDto, message, true);
@@ -99,10 +93,10 @@ public class CardController {
                                      @RequestParam (required = false) Integer idDeck,
                                      @RequestParam (required = false) String term,
                                      @RequestParam (required = false) String definition,
-                                     @RequestParam (required = false) String example,
-                                     @RequestParam (required = false) MultipartFile image,
-                                     @RequestParam (required = false) MultipartFile audio,
-                                     @RequestParam (required = false) Boolean isFavourite,
+                                         @RequestParam (required = false) String example,
+                                         @RequestParam (required = false) MultipartFile image,
+                                         @RequestParam (required = false) MultipartFile audio,
+                                         @RequestParam (required = false) Boolean isFavourite,
                                      @RequestParam (required = false) Boolean isRemembered) throws Exception {
         CardDto cardDto = cardService.updateCard(id ,idDeck, term, definition,
                 example,image,audio,isFavourite, isRemembered);

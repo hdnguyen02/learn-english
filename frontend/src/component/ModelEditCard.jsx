@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { baseUrl, version, fetchData } from "../global"
 
-const ModelEditCard = React.forwardRef(({ decks }, ref) => {
+const ModelEditCard = React.forwardRef(({ decks, getCards }, ref) => {
 
     const [isShow, setIsShow] = useState(false)
     const [message, setMessage] = useState()
@@ -69,6 +69,7 @@ const ModelEditCard = React.forwardRef(({ decks }, ref) => {
             }
             setMessageCss({'color': 'green'})
             setMessage(response.message)
+            getCards()
         }
         catch (error) {
             setMessageCss({'color': 'red'})

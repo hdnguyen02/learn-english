@@ -14,8 +14,6 @@ export default function ForgotPW() {
 
     async function handleResetPW(event) {
         event.preventDefault()
-
-
         // lấy ra token để có thể gửi lên. 
         const newPassword = document.getElementById('new-password').value
         const confirmPassword = document.getElementById('confirm-password').value
@@ -56,7 +54,7 @@ export default function ForgotPW() {
 
 
     return (
-        <div className='flex w-full justify-center'>
+        <div className='flex w-full justify-center mt-32'>
             <form onSubmit={handleResetPW} className='flex flex-col max-w-lg gap-y-6'>
                 <h1 className='font-medium text-3xl'>Đặt lại mật khẩu của bạn</h1>
                 <p>Đặt lại mật khẩu và xác nhận mật khẩu khẩu, vui lòng không chia sẻ link này cho bất cứ ai!</p>

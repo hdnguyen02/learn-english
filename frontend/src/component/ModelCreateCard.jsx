@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { baseUrl, version } from "../global"
 
-const ModelCreateCard = React.forwardRef(({ decks }, ref) => {
+const ModelCreateCard = React.forwardRef(({ decks, getCards }, ref) => {
 
     const [isShow, setIsShow] = useState(false)
     const [message, setMessage] = useState()
@@ -18,7 +18,6 @@ const ModelCreateCard = React.forwardRef(({ decks }, ref) => {
     }
 
     async function handleCreateCard(event) {
-        
         event.preventDefault()
         const inputTermCard = document.getElementById('card-term')
         const inputDefinitionCard = document.getElementById('card-definition')
@@ -62,6 +61,7 @@ const ModelCreateCard = React.forwardRef(({ decks }, ref) => {
             inputExampleCard.value = ''
             inputAudioCard.value = null
             inputImageCard.value = null
+            getCards()
 
         }
         catch (error) {

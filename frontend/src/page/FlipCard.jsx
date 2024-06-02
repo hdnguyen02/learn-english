@@ -1,51 +1,42 @@
 
-import React, { useEffect, useRef, useState } from 'react'
-import { baseUrl, version } from '../global'
+import React, { useEffect, useState } from 'react'
+import {baseUrl,version, fetchData } from '../global'
 import { useParams } from 'react-router-dom'
 import '../card.css'
 
 function Card() {
 
-    const accessToken = localStorage.getItem('accessToken')
+
     const params = useParams()
     const idDeck = params.id
     const [cards, setCards] = useState()
     const [deck, setDeck] = useState()
     const [index, setIndex] = useState(0)
+    const accessToken = localStorage.getItem('accessToken')
 
 
     async function getCards() {
-        const url = `${baseUrl + version}/cards?idDeck=${idDeck}`
-        try {
-            const jsonRp = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
-                },
-            })
-            const response = await jsonRp.json()
-            if (!jsonRp.ok) {
-                throw new Error(response.message)
-            }
+        const subUrl = `/cards/filter?idDeck=${idDeck}`
+        try { 
+            const response = await fetchData(subUrl, 'GET')
             setCards(response.data)
         }
-        catch (error) {
-
+        catch(error) { 
+            console.log(error.message)
         }
     }
 
     async function getDeck() {
-        const url = `${baseUrl}${version}/decks/${params.id}`
-        const jsonRp = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-            }
-        })
-        const response = await jsonRp.json()
-        setDeck(response.data)
+        const subUrl = `/decks/${params.id}`
+        try { 
+            const response = await fetchData(subUrl, 'GET')
+            setDeck(response.data)
+        }
+        catch(error) {
+            console.log(error.message)
+        }
     }
+
 
     useEffect(() => {
         getDeck()
@@ -63,8 +54,9 @@ function Card() {
             setIndex(index + 1)
         }
     }
+
+
     function handlePreCard() {
-        setIsFlip(false)
         const lenCards = cards.length
         if (index == 0) {
             setIndex(lenCards - 1)
@@ -74,27 +66,6 @@ function Card() {
         }
     }
 
-    async function handleDelete() {
-        const idCard = cards[index].id
-        const url = `${baseUrl + version}/cards/${idCard}`
-        try {
-            const jsonRp = await fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                },
-            })
-            const response = await jsonRp.json()
-            if (!jsonRp.ok) {
-                throw new Error(response.message)
-            }
-            setCards(cards.slice(0, index).concat(cards.slice(index + 1)))
-            await getCards()
-        }
-        catch (error) {
-            failRef.current.show(error.message, 2000)
-        }
-    }
 
     function front() {
         return <div className='h-full relative flex flex-col items-center justify-center'>
@@ -106,6 +77,7 @@ function Card() {
         </div>
     }
 
+
     function back() {
         return <div className='h-full relative flex flex-col items-center justify-center'>
             {action()}
@@ -114,13 +86,55 @@ function Card() {
         </div>
     }
 
+
+    // cho thích thẻ + đã nhớ
+    async function favouriteCard() {
+        const id = cards[index].id
+        const card = cards[index]
+        const formData = new FormData()
+        if (card.isFavourite) { 
+            formData.append('isFavourite', false) 
+        }
+        else { 
+            formData.append('isFavourite', true) 
+        }
+        const url = `${baseUrl + version}/cards/${id}`
+        try {
+            const jsonRp = await fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+                body: formData
+            })
+            const response = await jsonRp.json()
+            if (!jsonRp.ok) {
+                throw new Error(response.message)
+            }
+            getCards()
+        }
+        catch (error) {
+            console.log(error.message)
+        }
+    }
+
+
     function action() {
         return (
             <div className='absolute top-4 right-8 flex items-center gap-x-3'>
-                <button>
-                    <i className="fa-regular fa-star text-xl font-light"></i>
+                <button
+                    onClick={event => {
+                        event.stopPropagation()
+                        favouriteCard()
+                    }}
+                >
+                    { 
+                        cards[index].isFavourite ? (<i className="fa-regular fa-heart text-xl font-light text-red-500"></i>) 
+                        : (<i className="fa-regular fa-heart text-xl font-light"></i>)
+                    }
+                    
                 </button>
-                <button><i className="fa-regular fa-heart text-xl font-light"></i></button>
+                <button><i className="fa-regular fa-star text-xl font-light"></i></button>
             </div>
         )
     }
@@ -132,7 +146,9 @@ function Card() {
     return (cards && cards.length != 0 &&
         <div className='flex justify-center'>
             <div className="card-container">
-                <h3 className='text-3xl font-medium'>{ deck.name }</h3>
+                {
+                    deck && (<h3 className='text-xl font-medium'>Bộ thẻ: { deck.name }</h3>)
+                } 
                 <div className="mt-12 card mx-auto" id="card" onClick={handleFlipCard}>
                     <div className="card-front">
                         {front()}
@@ -142,9 +158,9 @@ function Card() {
                     </div>
                 </div>
                 <div className='flex gap-x-6 justify-center items-center mt-5'>
-                    <button onClick={handlePreCard} className="bg-[#F0F6F6]  h-12 w-12 rounded-full"><i className="fa-solid fa-chevron-left text-xl"></i></button>
+                    <button onClick={handlePreCard} className="bg-[#F0F6F6] h-12 w-12 rounded-full"><i className="fa-solid fa-chevron-left text-xl"></i></button>
                     <span className='text-xl'>{index + 1}/{cards.length}</span>
-                    <button onClick={handleNextCard} className="bg-[#F0F6F6]  h-12 w-12 rounded-full"><i className="fa-solid fa-chevron-right text-xl"></i></button>
+                    <button onClick={handleNextCard} className="bg-[#F0F6F6] h-12 w-12 rounded-full"><i className="fa-solid fa-chevron-right text-xl"></i></button>
                 </div>
             </div>
         </div>

@@ -1,48 +1,35 @@
 
 import { useRef, useState, useEffect } from 'react'
-import { baseUrl, version } from '../global'
+import { fetchData } from '../global'
 import { Link } from 'react-router-dom'
 import DeleteDeck from './DeleteDeck'
 import Success from './Success'
 import Fail from './Fail'
-import { useNavigate } from 'react-router-dom'
+import ModelCreateDeck from './ModelCreateDeck'
+
 
 function Decks() {
 
     const [decks, setDecks] = useState()
     const refSuccess = useRef()
     const refFail = useRef()
+    const refModelCreateDeck = useRef()
     const [idDeckDelete, setIdDeckDelete] = useState(null)
     const [searchTerm, setSearchTerm] = useState('')
-    const navigate = useNavigate()
+
 
     async function handleDeleteDeck() {
-
-
-        const accessToken = localStorage.getItem('accessToken')
-        const url = `${baseUrl + version}/decks/${idDeckDelete}`
+        const subUrl = `/decks/${idDeckDelete}`
         try {
-            const jsonRp = await fetch(url, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                },
-            })
-            const response = await jsonRp.json()
-            if (!jsonRp.ok) {
-                throw new Error(response.message)
-            }
-            const data = response.data
-            const message = response.message
-            refSuccess.current.show(2000, message)
-            fetchDecks()
-            handleCancel() // đóng thẻ lại
+            await fetchData(subUrl, 'DELETE')
+            await getDecks()
+            refSuccess.current.show('Xóa bộ thẻ thành công', 2000)
         }
         catch (error) {
-            failRef.current.show(error.message, 2000)
+            failRef.current.show('Đã có lỗi xảy ra!', 2000)
         }
+        handleCancel() 
         setIdDeckDelete(null)
-
     }
 
     function handleCancel() {
@@ -57,48 +44,35 @@ function Decks() {
     }
 
 
-
-    async function fetchDecks(searchDecks) {
-        const accessToken = localStorage.getItem('accessToken')
-        let url
-        if (searchDecks && searchDecks != '') url = url = `${baseUrl + version}/decks?searchTerm=${searchDecks}`
-        else url = `${baseUrl + version}/decks`
-        try {
-            const jsonRp = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                },
-            })
-            const response = await jsonRp.json()
-            if (!jsonRp.ok) {
-                throw new Error(response.message)
-            }
+    async function getDecks(searchDecks) {
+        let subUrl
+        if (searchDecks && searchDecks != '') subUrl = `/decks?searchTerm=${searchDecks}`
+        else subUrl = `/decks`
+        try { 
+            const response = await fetchData(subUrl, 'GET')
             setDecks(response.data)
         }
-        catch (error) {
-            console.log(error.message)
+        catch(error) {
+            console.log(error)
         }
     }
 
 
     useEffect(() => {
-        fetchDecks(searchTerm)
+        getDecks(searchTerm)
     }, [searchTerm])
 
 
 
 
     return <div>
-        <div className='profile flex gap-x-3 items-center justify-between font-medium'>
-            <div className='flex gap-x-3 items-center'>
-                <h3 className='text-md md:text-2xl font-medium'>Danh sách bộ thẻ</h3>
-            </div>
-            <div className='flex gap-x-8 items-center'>
+        <ModelCreateDeck ref={refModelCreateDeck} getDecks={getDecks}/>
+        <div className='profile flex gap-x-3 items-center justify-end font-medium pb-2'>
 
-                <Link to={'/decks/create'} className=''>
+            <div className='flex gap-x-8 items-center'>
+                <button onClick={() => {refModelCreateDeck.current.show()}} className=''>
                     <img src="plus.png" className='w-9' alt="" />
-                </Link>
+                </button>
                 <div className="max-w-md mx-auto">
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -108,13 +82,13 @@ function Decks() {
                         </div>
                         <input onChange={(event) => {
                             setSearchTerm(event.target.value)
-                        }} type="search" id="decks-search" className="block w-full px-4 py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Tên, mô tả..." />
+                        }} type="search" id="decks-search" className="block w-full  px-4 h-10 ps-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Tên, mô tả..." />
                     </div>
                 </div>
             </div>
         </div>
 
-        <hr className='my-12'></hr>
+        <hr className='my-4'></hr>
 
         {decks &&
             <div className='mt-8'>

@@ -22,7 +22,10 @@ export async function fetchData(subUrl, method, body) {
     try { 
         const responseAPI = await fetch(url, options)
         const response = await responseAPI.json()  
-        if (!responseAPI.ok) throw new Error(response.message)
+        if (!responseAPI.ok) {
+            const error = { code: responseAPI.status, message: response.message || 'An error occurred' };
+            throw error;
+        }
         return {
             data: response.data, 
             message: response.message
@@ -38,4 +41,26 @@ export function convertValueFromSelect(str) {
     if (str == 'true') return true
     if (str === 'false') return false
     else return +str // chuyển về số.
+}
+
+
+export function handleError(code) { 
+    switch (code) {
+        case 400:
+            console.error('Bad Request: Yêu cầu không hợp lệ!')
+            break;
+        case 401:
+            console.error('Unauthorized: Người dùng chưa đăng nhập!')
+            
+            break;
+        case 403:
+            console.error('Forbidden: Người dùng không có quyền truy cập!')
+            break;
+        case 404:
+            console.error('Not Found: Không tìm thấy tài nguyên!')
+            break;
+        default:
+            console.error('Lỗi khác:', error)
+            break;
+    }
 }

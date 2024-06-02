@@ -107,6 +107,10 @@ input[type="file"] {
   color: green;
 }
 
+.link-active-mobile {
+  color: #F8B63B;
+}
+
 /* Chỉ áp dụng cho trình duyệt WebKit như Chrome, Safari */
 ::-webkit-scrollbar {
   width: 8px; /* Đặt chiều rộng của thanh cuộn dọc */

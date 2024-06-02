@@ -6,7 +6,7 @@ export default function InfoUser() {
 
     const failRef = useRef(null)
     const successRef = useRef(null)
-    let  isChangeAvatar = false
+    let isChangeAvatar = false
     const [user, setUser] = useState()
     async function getUser() {
         try {
@@ -25,7 +25,7 @@ export default function InfoUser() {
             }
             setUser(response.data)
         }
-        catch(error) {
+        catch (error) {
             failRef.current.show(error.message, 2000)
         }
     }
@@ -43,7 +43,7 @@ export default function InfoUser() {
         const elAvatar = document.getElementById('input-avatar')
         const formData = new FormData()
 
-        
+
         formData.append('name', elName.value)
         formData.append('gender', elGender.value)
         formData.append('age', elAge.value)
@@ -66,7 +66,7 @@ export default function InfoUser() {
         }
         catch (error) {
             failRef.current.show(error.message, 2000)
-        }        
+        }
     }
 
     function handleUploadAvatar(event) {
@@ -78,34 +78,37 @@ export default function InfoUser() {
         }
         reader.readAsDataURL(file)
     }
-    
+
     useEffect(() => {
         getUser()
-    }, [])  
+    }, [])
 
     return (user && <div className="flex justify-center items-center w-full px-12">
-        <div className="flex flex-col items-center mt-4">
+        <div className="flex flex-col items-center shadow-2xl sm:max-w-md p-12 rounded-lg">
             <form
                 onSubmit={handleChangeInfo}
                 className="w-full max-w-lg"
             >
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                     {user.avatar ? (<img
                         id="avatar"
-                        className="w-20 h-20 object-cover rounded-full"
+                        className="w-20 h-20 object-cover rounded-lg-full"
                         src={`${baseUrl + '/avatar/'+ user.avatar}`}
                         alt=""
                     />):(
                         <img
                         id="avatar"
-                        className="w-20 h-20 object-cover rounded-full"
+                        className="w-20 h-20 object-cover rounded-lg-full"
                         src="/user.png"
                         alt=""
                     />
                     )
                     }
                     
-                </div>
+                </div> */}
+                <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                    Thông tin chung
+                </h2>
                 <div className="mt-4 flex flex-wrap md:-mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label
@@ -116,7 +119,7 @@ export default function InfoUser() {
                         </label>
                         <input defaultValue={user.name ? user.name : ''}
                             name="name"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:bg-white"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded-lg py-3 px-4 leading-tight focus:bg-white"
                             id="name"
                             type="text"
                         />
@@ -130,7 +133,7 @@ export default function InfoUser() {
                         </label>
                         <select defaultValue={user.gender ? user.gender : ''}
                             name="gender"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:bg-white"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded-lg py-3 px-4 leading-tight focus:bg-white"
                             id="gender"
                         >
                             <option value="null">-</option>
@@ -150,7 +153,7 @@ export default function InfoUser() {
                         <input defaultValue={user.email}
                             readOnly
                             name="email"
-                            className="appearance-none block w-full bg-gray-300 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:bg-white"
+                            className="appearance-none block w-full bg-gray-300 text-gray-700 rounded-lg py-3 px-4 mb-3 leading-tight focus:bg-white"
                             id="email"
                         >
 
@@ -167,7 +170,7 @@ export default function InfoUser() {
                         </label>
                         <input defaultValue={user.age ? user.age : ''}
                             name="age"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:bg-white"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded-lg py-3 px-4 leading-tight focus:bg-white"
                             id="age"
                             type="number"
 
@@ -186,7 +189,7 @@ export default function InfoUser() {
                         <input
                             defaultValue={user.phone ? user.phone : ''}
                             name="phone"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:bg-white"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded-lg py-3 px-4 leading-tight focus:bg-white"
                             id="phone"
                             type="text"
                         />
@@ -195,15 +198,15 @@ export default function InfoUser() {
                         <label
                             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             htmlFor="grid-last-name">
-                                Ngày sinh
-                            </label>
-                            <input defaultValue={user.dateOfBirth ? user.dateOfBirth : ''}     
-                                name="dateOfBirth"
-                                className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 leading-tight focus:bg-white"
-                                id="date-of-birth"
-                                type="date"
-                            />
-                        </div>
+                            Ngày sinh
+                        </label>
+                        <input defaultValue={user.dateOfBirth ? user.dateOfBirth : ''}
+                            name="dateOfBirth"
+                            className="appearance-none block w-full bg-gray-200 text-gray-700 rounded-lg py-3 px-4 leading-tight focus:bg-white"
+                            id="date-of-birth"
+                            type="date"
+                        />
+                    </div>
                 </div>
                 <div>
                     <label>
@@ -212,7 +215,11 @@ export default function InfoUser() {
                     </label>
                 </div>
                 <div className="mt-6 flex justify-end">
-                    <button type="submit" className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+
+                    <button
+                        type="submit"
+                        className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    >
                         Hiệu chỉnh
                     </button>
                 </div>

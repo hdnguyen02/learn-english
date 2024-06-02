@@ -19,12 +19,8 @@ import ResetPW from './page/ResetPW'
 import PrivateRoutes from './helper/PrivateRoutes'
 import Deck from './page/Deck'
 import Decks from './component/Decks'
-import CreateCard from './component/CreateCard'
 import FlipCard from './page/FlipCard'
-import EditDeck from './component/EditDeck'
 import Contact from './page/Contact'
-import CreateDeck from './component/CreateDeck'
-import EditCard from './component/EditCard'
 import Card from './page/Card'
 import Cards from './component/Cards'
 import { useEffect } from 'react'
@@ -78,15 +74,11 @@ function App() {
 
             <Route path='/decks' element={<Deck />}>
               <Route path='' element={<Decks />} />
-              <Route path='create' element={<CreateDeck />} />
-              <Route path=':id/create-cards' element={<CreateCard />} />
-              <Route path='edit/:id' element={<EditDeck />} />
               <Route path=':id/learn-cards' element={<FlipCard />} />
             </Route>
 
             <Route path="/cards" element={<Card />} >
               <Route path='' element={<Cards />} />
-              <Route path='edit/:id' element={<EditCard />} />
             </Route>
 
             {/* settings */}

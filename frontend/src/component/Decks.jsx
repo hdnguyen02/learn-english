@@ -6,6 +6,7 @@ import DeleteDeck from './DeleteDeck'
 import Success from './Success'
 import Fail from './Fail'
 import ModelCreateDeck from './ModelCreateDeck'
+import ModelEditDeck from './ModelEditDeck'
 
 
 function Decks() {
@@ -14,6 +15,7 @@ function Decks() {
     const refSuccess = useRef()
     const refFail = useRef()
     const refModelCreateDeck = useRef()
+    const refModelEditDeck = useRef()
     const [idDeckDelete, setIdDeckDelete] = useState(null)
     const [searchTerm, setSearchTerm] = useState('')
 
@@ -56,6 +58,10 @@ function Decks() {
             console.log(error)
         }
     }
+    
+    function handleEditDeck(id) {
+        refModelEditDeck.current.show(id)
+    }
 
 
     useEffect(() => {
@@ -67,6 +73,7 @@ function Decks() {
 
     return <div>
         <ModelCreateDeck ref={refModelCreateDeck} getDecks={getDecks}/>
+        <ModelEditDeck ref={refModelEditDeck} getDecks={getDecks}/>
         <div className='profile flex gap-x-3 items-center justify-end font-medium pb-2'>
 
             <div className='flex gap-x-8 items-center'>
@@ -135,8 +142,8 @@ function Decks() {
                                     </td>
 
                                     <td className="px-6 py-4 text-center">
-                                        <Link to={`/decks/edit/${deck.id}`}><i className="fa-regular fa-pen-to-square text-xl"></i>
-                                        </Link>
+                                        <button onClick={() => handleEditDeck(deck.id)} ><i className="fa-regular fa-pen-to-square text-xl"></i>
+                                        </button>
                                     </td>
                                     <td onClick={(event) => showPopupDeleteDeck(event, deck.id)} className="px-6 py-4 text-center">
                                         <i className="fa-regular fa-trash-can text-xl"></i>

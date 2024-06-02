@@ -84,37 +84,23 @@ function Navbar() {
             <img src='/close.png' className='w-8' alt='' />
           </button>
           <li className='hover:cursor-pointer font-medium'>
-          <Link className={location.pathname === '/' ? 'link-active' : ''} to={'/'} >Trang chủ</Link>
+          <Link className={location.pathname === '/' ? 'link-active-mobile' : ''} to={'/'} >Trang chủ</Link>
         </li>
         {isAuthenticated &&<li className='hover:cursor-pointer font-medium'>
-          <Link className={location.pathname.includes('/decks') ? 'link-active' : ''} to={'/decks'} >Bộ thẻ</Link>
+          <Link className={location.pathname.includes('/decks') ? 'link-active-mobile' : ''} to={'/decks'} >Bộ thẻ</Link>
         </li>}
         {isAuthenticated &&<li className='hover:cursor-pointer font-medium'>
-          <Link className={location.pathname.includes('/cards') ? 'link-active' : ''} to={'/cards'} >Thẻ</Link>
+          <Link className={location.pathname.includes('/cards') ? 'link-active-mobile' : ''} to={'/cards'} >Thẻ</Link>
         </li>}
         {isAuthenticated &&<li className='hover:cursor-pointer font-medium'>
-          <Link className={location.pathname.includes('/classes') ? 'link-active' : ''} to={'/classes'} >Lớp</Link>
+          <Link className={location.pathname.includes('/classes') ? 'link-active-mobile' : ''} to={'/classes'} >Lớp</Link>
         </li>}
 
   
         <li className='hover:cursor-pointer font-medium'>
-          <Link className={location.pathname === '/contact' ? 'link-active' : ''} to={'/contact'} >Liên hệ</Link>
+          <Link className={location.pathname === '/contact' ? 'link-active-mobile' : ''} to={'/contact'} >Liên hệ</Link>
         </li>
-          {/* <li>
-            <Link to={'/'}>Trang chủ</Link>
-          </li>
-          {isAuthenticated && <li>
-            <Link to={'/decks'}>Bộ thẻ</Link>
-          </li>}
-          {isAuthenticated && <li>
-            <Link to={'/cards'}>Thẻ</Link>
-          </li>}
-          {isAuthenticated && <li>
-            <Link to={'/classes'}>Lớp</Link>
-          </li>}
-          <li>
-            <Link to={'/contact'}>Liên hệ</Link>
-          </li> */}
+
         </ul>
       </div>
     </nav>

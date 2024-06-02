@@ -1,6 +1,6 @@
 package com.hdnguyen.learnenglish.controller;
 
-    
+
 import com.hdnguyen.learnenglish.dto.CardDto;
 import com.hdnguyen.learnenglish.response.Response;
 import com.hdnguyen.learnenglish.service.CardService;
@@ -17,11 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("${system.version}")
 public class CardController {
-
-
     private final CardService cardService;
-
-
     @PostMapping("cards")
     public ResponseEntity<Response> createCard(
             @RequestParam Integer idDeck,

@@ -31,8 +31,4 @@ public class Deck {
 
     @Column(name = "create_at", length = 10)
     private String createAt;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_classroom")
-    private Classroom classroom;
 }

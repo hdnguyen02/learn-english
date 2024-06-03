@@ -43,18 +43,8 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "users_roles", joinColumns = @JoinColumn(name = "email_user"),inverseJoinColumns = @JoinColumn(name = "name_role"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Classroom> myClassrooms;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable( name = "users_classrooms", joinColumns = @JoinColumn(name = "email_user"),inverseJoinColumns = @JoinColumn(name = "id_classroom"))
-    private List<Classroom> participatingClassrooms;
-
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Comment> comments;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Token> tokens;
@@ -70,6 +60,10 @@ public class User implements UserDetails {
 
     @Column
     private String avatar;
+
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<UserGroup> userGroups;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,4 +82,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.isEnabled;
     }
+    
+    public User(String email) {
+        this.email = email;
+    }
+
+
 }

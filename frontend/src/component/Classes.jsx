@@ -1,21 +1,28 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import ModelCreateClass from './ModelCreateClass'
 
 function Classes() {
+
+    const refModelCreateClass = useRef()
+
+
+    function handleShowCreateClass() { 
+        refModelCreateClass.current.show()
+    }
+    
+
+
     return <div>
 
-<div className='profile flex gap-x-3 items-center justify-between font-medium'>
-            <div className='flex gap-x-3 items-center'>
-                <div className='rounded-full overflow-hidden h-9 w-9'>
-                    <img className='object-cover w-full h-full' src='../../public/avatar.avif' alt='Avatar' />
-                </div>
-                <h1>Thầy Thuận badboi</h1>
-            </div>
-            <div className='flex gap-x-8 items-center'>
+<div className='profile flex gap-x-3 items-center justify-end font-medium'>
+            <ModelCreateClass ref={refModelCreateClass}/>
+ 
+            <div className='flex gap-x-8 items-cente'>
 
-                <Link to={'/classes/create'} className=''>
+                <button onClick={handleShowCreateClass} className=''>
                     <img src="plus.png" className='w-9' alt="" />
-                </Link>
+                </button>
                 <div className="max-w-md mx-auto">
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -23,7 +30,7 @@ function Classes() {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                             </svg>
                         </div>
-                        <input type="search" id="decks-search" className="block w-full px-4 py-2 ps-10 text-sm text-gray-900 border-2 border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Tên, mô tả..." />
+                        <input type="search" id="decks-search" className="block w-full px-4 py-2 ps-10 text-sm text-gray-900  border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Tên, mô tả..." />
                     </div>
                 </div>
             </div>

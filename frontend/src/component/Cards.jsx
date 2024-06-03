@@ -5,7 +5,6 @@ import Success from './Success'
 import Fail from './Fail'
 import ModelCreateCard from './ModelCreateCard'
 import ModelEditCard from './ModelEditCard'
-import '../css/cards.css'
 
 export default function Cards() {
 

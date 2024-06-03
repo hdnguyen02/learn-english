@@ -14,7 +14,7 @@ function Settings() {
     {/* sidebar */}
     <div id='side-bar' className=' z-10 selection:hidden md:block bg-[#1D1918] text-[#E2E0DE] h-screen w-[230px] px-6 py-12 fixed top-0 bottom-0'>
         {/* <h1 className='font-medium text-3xl'>Cài đặt</h1> */}
-        <button onClick={handleCloseSideBar} className='md:hidden absolute top-[48px] right-6'><i class="fa-solid fa-xmark text-3xl"></i></button>
+        <button onClick={handleCloseSideBar} className='md:hidden absolute top-[48px] right-6'><i className="fa-solid fa-xmark text-3xl"></i></button>
         <ul className='mt-8 flex flex-col gap-y-3'>
             
             <li className='flex items-center gap-x-3'>

@@ -20,7 +20,7 @@ public class App {
 		return arg -> {
 			List<Role> roles = roleDao.findAll();
 			if (!roles.isEmpty()) return;
-			Role roleStudent = new Role("STUDENT");
+			Role roleStudent = new Role("USER");
 			Role roleTeacher = new Role("TEACHER");
 			Role roleAdmin = new Role("ADMIN");
 			roles.add(roleStudent);

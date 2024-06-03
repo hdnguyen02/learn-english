@@ -225,8 +225,6 @@ export default function InfoUser() {
                 </div>
             </form>
         </div>
-
-
         <Fail ref={failRef} />
         <Success ref={successRef} />
     </div>)

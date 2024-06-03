@@ -1,31 +1,47 @@
 package com.hdnguyen.learnenglish.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Table(name="comments")
+import java.util.HashSet;
+import java.util.Set;
+
+
+@Table(name = "comments")
 @Entity
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class Comment {
+@NoArgsConstructor
+public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "parentId")
+    private Comment comment;
+
+    @Column(length = Integer.MAX_VALUE)
     private String content;
 
-    @Column(nullable = false)
-    private String time;
+    @OneToMany(mappedBy = "comment")
+    private Set<Comment> comments = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_classroom")
-    private Classroom classroom;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="email_user")
+    //    private Long userId;
+    @ManyToOne()
+    @JoinColumn(name = "email_user")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
+    public  Comment(Long id) {
+        this.id = id;
+    }
+
 }

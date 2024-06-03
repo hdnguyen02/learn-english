@@ -16,7 +16,7 @@ public class DeckDto {
     private String description;
     private String name;
     private String createAt;
-    private List<CardOfDeck> cards = new ArrayList<>();
+    private List<CardOfDeck> cards;
 
     public DeckDto(Deck deck) {
         this.id = deck.getId();

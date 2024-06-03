@@ -19,6 +19,9 @@ public class UserDto {
     private List<String> roles;
 
     public UserDto(User user) {
+        System.out.println("Trước khi getRole");
+        System.out.println(user.getRoles());
+        System.out.println("Sau khi getRole");
         roles = new ArrayList<>();
         email = user.getEmail();
         name = user.getName();

@@ -45,7 +45,7 @@ public class AuthService {
         String password = signUpRequest.getPassword();
         Boolean isRemember = signUpRequest.getIsRemember() != null;
 
-        Role role = new Role("STUDENT");
+        Role role = new Role("USER");
         Set<Role> roles = new HashSet<>();
         roles.add(role);
 

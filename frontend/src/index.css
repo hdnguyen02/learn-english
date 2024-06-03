@@ -130,3 +130,53 @@ input[type="file"] {
 html {
   overflow-y: scroll;
 }
+
+
+/* card css */
+
+.card-container {
+  perspective: 1000px;
+  width: 700px;
+  
+}
+
+.card {
+  width: 700px;
+  height: 350px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-front {
+  color: #000;
+}
+
+@media (max-width: 900px) {
+  .card {
+      height: 250px;
+      width: 400px;
+  }
+} 

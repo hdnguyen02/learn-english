@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import {baseUrl,version, fetchData } from '../global'
 import { useParams } from 'react-router-dom'
-import '../card.css'
 
 function Card() {
 
